@@ -15,6 +15,9 @@ public class FormAlumno extends javax.swing.JFrame {
      */
     public FormAlumno() {
         initComponents();
+        
+        CConexion objetoConexion = new CConexion();
+        objetoConexion.establecerConexion();
     }
 
     /**
@@ -51,6 +54,11 @@ public class FormAlumno extends javax.swing.JFrame {
         jLabel3.setText("Apellidos:");
 
         btnguardar.setText("Guardar");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguardarActionPerformed(evt);
+            }
+        });
 
         btnmodificar.setText("Modificar");
 
@@ -154,6 +162,13 @@ public class FormAlumno extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        // TODO add your handling code here:
+        
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.InsertarAlumno(txtnombres, txtapellidos);
+    }//GEN-LAST:event_btnguardarActionPerformed
 
     /**
      * @param args the command line arguments

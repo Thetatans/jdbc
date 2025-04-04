@@ -4,6 +4,10 @@
  */
 package com.mycompany.jdbc;
 
+import java.sql.CallableStatement;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author SENA
@@ -37,5 +41,28 @@ public class CAlumnos {
     String nombreAlumno;
     String apellidoAlumno;
     
+    
+       public void InsertarAlumno(JTextField paramNombres, JTextField paramApellidos){
+    
+        setNombreAlumno(paramNombres.getText());
+        setApellidoAlumno(paramApellidos.getText());
+        // Establecemos conexión//
+        CConexion objetoConexion = new CConexion();
+//incorporamos la consulta ya la habíamos hecho en la base de datos Myqsl//  La copiamos y la llevamos.
+ String consulta = "insert into Alumnos (nombres, apellidos) values (?,?);";
+try {
+           
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+            cs.setString(1, getNombreAlumno());
+            cs.setString(2, getApellidoAlumno());
+            
+        cs.execute();
+    JOptionPane.showMessageDialog(null, "Se inserto correctamente el alumno");
+        
+    
+    } catch (Exception e){
+        JOptionPane.showConfirmDialog(null,"No se insertó correctamente el alumno, error: "+e.toString());
 }
 
+
+       }}

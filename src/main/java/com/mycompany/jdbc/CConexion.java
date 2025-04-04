@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 public class CConexion {
     Connection conectar = null;
     
-    String usuario="root";
-    String Contrasenia="1234";
-    String bd="bdescuela";
-    String ip="localhost";
-    String puerto ="3306";
+    String usuario = "root";
+    String Contrasenia = "1234";
+    String bd = "bdescuela";
+    String ip = "localhost";
+    String puerto = "3306";
     
-    String cadena="jdbc:mysql://"+ip+""+puerto+"/"+bd;
+    String cadena = "jdbc:mysql://"+ip+":"+puerto+"/"+bd;
     
     public Connection establecerConexion(){
         try {
