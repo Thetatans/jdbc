@@ -15,9 +15,15 @@ public class FormAlumno extends javax.swing.JFrame {
      */
     public FormAlumno() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        txtid.setEnabled(false);
+
         
         CConexion objetoConexion = new CConexion();
         objetoConexion.establecerConexion();
+        
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.MostrarAlumno(tbTotalAlumnos);
     }
 
     /**
@@ -39,6 +45,7 @@ public class FormAlumno extends javax.swing.JFrame {
         txtid = new javax.swing.JTextField();
         txtnombres = new javax.swing.JTextField();
         txtapellidos = new javax.swing.JTextField();
+        btnlimpiar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbTotalAlumnos = new javax.swing.JTable();
@@ -61,8 +68,25 @@ public class FormAlumno extends javax.swing.JFrame {
         });
 
         btnmodificar.setText("Modificar");
+        btnmodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodificarActionPerformed(evt);
+            }
+        });
 
         btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarActionPerformed(evt);
+            }
+        });
+
+        btnlimpiar.setText("Limpiar");
+        btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,7 +107,8 @@ public class FormAlumno extends javax.swing.JFrame {
                             .addComponent(txtapellidos)))
                     .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnmodificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnlimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,12 +126,14 @@ public class FormAlumno extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(btnguardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnmodificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btneliminar)
+                .addGap(18, 18, 18)
+                .addComponent(btnlimpiar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -123,6 +150,11 @@ public class FormAlumno extends javax.swing.JFrame {
 
             }
         ));
+        tbTotalAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTotalAlumnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbTotalAlumnos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -137,7 +169,7 @@ public class FormAlumno extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 78, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,7 +200,37 @@ public class FormAlumno extends javax.swing.JFrame {
         
         CAlumnos objetoAlumnos = new CAlumnos();
         objetoAlumnos.InsertarAlumno(txtnombres, txtapellidos);
+        objetoAlumnos.MostrarAlumno(tbTotalAlumnos);
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void tbTotalAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTotalAlumnosMouseClicked
+        // TODO add your handling code here:
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.SeleccionarAlumno(tbTotalAlumnos, txtid, txtnombres, txtapellidos);
+    }//GEN-LAST:event_tbTotalAlumnosMouseClicked
+
+    private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
+        // TODO add your handling code here:
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.ModificarAlumnos(txtid, txtnombres, txtapellidos);
+   objetoAlumnos.MostrarAlumno(tbTotalAlumnos);
+    }//GEN-LAST:event_btnmodificarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        // TODO add your handling code here:
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.EliminarAlumnos(txtid);
+        objetoAlumnos.MostrarAlumno(tbTotalAlumnos);
+    }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
+        // TODO add your handling code here:
+        
+    txtid.setText("");
+    txtnombres.setText("");
+    txtapellidos.setText("");
+
+    }//GEN-LAST:event_btnlimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,6 +270,7 @@ public class FormAlumno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
+    private javax.swing.JButton btnlimpiar;
     private javax.swing.JButton btnmodificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
